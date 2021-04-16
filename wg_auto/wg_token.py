@@ -60,9 +60,8 @@ class WebgoatLogin:
     def set_cookie(headers, cookie):
         return dict(**headers, **{"Cookie": cookie})
 
-    def check(self, headers):
-        url = "/service/lessonmenu.mvc"
-        response = request(method='get', url=self.server + url, headers=headers, allow_redirects=False)
+    def check(self, headers, permit_url='/SqlInjection.lesson.lesson'):
+        response = request(method='get', url=self.server + permit_url, headers=headers, allow_redirects=False)
         if int(response.status_code) > 200:
             return False
         return True
